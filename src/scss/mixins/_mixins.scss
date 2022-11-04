@@ -1,0 +1,129 @@
+/* Mixins */
+@import "helpers";
+@import "flexbox";
+
+// Mixins
+@mixin global-transition($trans_args: $transition) {
+  -webkit-transition: $trans_args;
+  -moz-transition: $trans_args;
+  -ms-transition: $trans_args;
+  -o-transition: $trans_args;
+  transition: $trans_args;
+}
+
+@mixin aspect-ratio($width: 1, $height: 1) {
+  position: relative;
+
+  &:before {
+    display: block;
+    content: " ";
+    width: 100%;
+    padding-bottom: ($height / $width) * 100%;
+  }
+}
+
+@mixin center($axis: "both") {
+  position: absolute;
+  @if $axis == "y" {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  @if $axis == "x" {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  @if $axis == "both" {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@mixin linear-gradient($deg: 180deg, $start: $black, $end: transparent) {
+  background-image: -webkit-linear-gradient($deg, $start 0%, $end 100%);
+  background-image: -moz-linear-gradient($deg, $start 0%, $end 100%);
+  background-image: -o-linear-gradient($deg, $start 0%, $end 100%);
+  background-image: -ms-linear-gradient($deg, $start 0%, $end 100%);
+  background: linear-gradient($deg, $start 0%, $end 100%);
+}
+
+@mixin box-shadow(
+  $horiz: 0,
+  $vert: 0,
+  $blur: 12px,
+  $spread: 2px,
+  $color: rgba(0, 0, 0, 0.15) !important
+) {
+  -webkit-box-shadow: $horiz $vert $blur $spread $color;
+  -moz-box-shadow: $horiz $vert $blur $spread $color;
+  box-shadow: $horiz $vert $blur $spread $color;
+}
+
+@mixin container($size: "") {
+  @if $size == "" {
+    max-width: $site-width;
+  } @else if $size == "sm" {
+    max-width: $site-width-sm;
+  } @else if $size == "lg" {
+    max-width: $site-width-lg;
+  }
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+@mixin triangle($direction, $size: 0.375rem, $color: #ccc) {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 0;
+  width: 0;
+  @if ($direction == "up") {
+    border-bottom: $size solid $color;
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+  } @else if ($direction == "down") {
+    border-top: $size solid $color;
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+  } @else if ($direction == "left") {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-right: $size solid $color;
+  } @else if ($direction == "right") {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-left: $size solid $color;
+  }
+}
+
+/* classes to remove padding from columns */
+@mixin no-padding($side) {
+  @if $side== "all" {
+    .no-padding {
+      padding: 0 !important;
+    }
+  } @else {
+    .no-padding-#{$side} {
+      padding-#{$side}: 0 !important;
+    }
+  }
+}
+
+@mixin clearfix() {
+  &:after,
+  &:before {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
+
+@mixin placeholder {
+  $placeholders: ":-webkit-input" ":-moz" "-moz" "-ms-input";
+  @each $placeholder in $placeholders {
+    &:#{$placeholder}-placeholder {
+      @content;
+    }
+  }
+}

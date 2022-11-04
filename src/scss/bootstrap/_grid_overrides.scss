@@ -1,0 +1,31 @@
+/* Container */
+
+.container {
+    width: 100%;
+    max-width: $site-width;
+    @include bs-gutter($bs-gutter, 'pos');
+    margin: 0 auto;
+  
+    &.sm {
+      max-width: $site-width-sm;
+    }
+  
+    &.md {
+      max-width: $site-width-md;
+    }
+  
+    &.lg {
+      max-width: $site-width-lg;
+    }
+  }
+  
+  .container,
+  .container-fluid {
+    .row {
+      @include bs-gutter($bs-gutter, 'neg');
+      [class^="col-"],
+      >* {
+        @include bs-gutter($bs-gutter, 'pos');
+      }
+    }
+  }

@@ -1,0 +1,262 @@
+$pusher-padding: 100px 0;
+
+.team-wrapper {
+  > div,
+  .pushr {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    display: table;
+    padding: 0;
+
+    > ul {
+      width: 100%;
+      font-size: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 0;
+
+      > li {
+        display: inline-block;
+        overflow: hidden;
+        font-size: 1.8rem;
+        padding: 2rem 2rem 25px;
+        z-index: 2;
+        overflow: hidden;
+        text-align: left;
+
+        &.pushItem {
+          width: 100%;
+          max-width: 320px;
+
+          @include media-breakpoint-up(sm) {
+            width: 50%;
+          }
+
+          @include media-breakpoint-up(lg) {
+            width: 33%;
+          }
+
+          vertical-align: top;
+        }
+
+        .push-item-content {
+          background-color: $white;
+          padding: 15px 15px 30px;
+          text-align: center;
+          height: 100%;
+          @include flexbox;
+          @include flex-flow(column);
+
+          .team-image-wrap {
+            display: block;
+            background: #f2f2f2;
+            overflow: hidden;
+
+            .team-image {
+              display: block;
+              list-style: none;
+              width: 100%;
+              @include aspect-ratio(334, 253);
+              text-align: center;
+              background-size: cover;
+            }
+          }
+
+          .team-name {
+            margin-top: 15px;
+            text-decoration: none;
+            position: relative;
+            padding: 40px 20px;
+            width: 100%;
+            display: block;
+            border: 2px solid $black;
+            @include flex(1, 0, auto);
+
+            h3 {
+              color: $red;
+              font-weight: 700;
+              font-style: normal;
+              font-size: 2rem;
+              text-transform: uppercase;
+              margin: 0;
+            }
+          }
+
+          a.team-name {
+            &:after {
+              content: "";
+              display: block;
+              width: 33px;
+              height: 33px;
+              position: absolute;
+              left: 50%;
+              bottom: 0;
+              transform: translate(-50%, 50%) rotate(0);
+              background-image: url("#{$image-path}arrow-circle.svg");
+              background-size: contain;
+              background-repeat: no-repeat;
+              background-position: top center;
+            }
+          }
+
+          .position {
+            line-height: 1;
+            margin-top: 10px;
+            color: $black;
+          }
+
+          .reveal-text {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            overflow: visible;
+            width: 100%;
+            padding: 0 $bs-gutter;
+
+            .container {
+              padding: $pusher-padding;
+              text-align: left;
+
+              .team-header {
+                text-align: center;
+                margin-bottom: 40px;
+
+                .team-title {
+                  margin: 0 auto;
+                }
+              }
+
+              ul {
+                padding-bottom: 30px;
+
+                li {
+                  list-style-type: disc;
+                }
+              }
+            }
+          }
+        }
+
+        span.arrow {
+          position: absolute;
+          z-index: -1;
+          top: 80%;
+          left: 50%;
+          opacity: 0;
+
+          &:after {
+            content: "";
+            position: absolute;
+            right: 50%;
+            bottom: -21px;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 25px solid #fff;
+            display: block;
+            width: 0;
+            transform: translateX(50%);
+          }
+        }
+
+        &.push-wrapper {
+          position: relative;
+          overflow: hidden;
+          width: 100%;
+          max-height: 0;
+          padding: 0;
+          margin: 0 2rem;
+          //@include global-transition();
+          z-index: 1;
+          flex-shrink: 0;
+          background-color: $white;
+          .push-content {
+            position: relative;
+            padding: 40px;
+
+            .team-header {
+              text-align: center;
+              margin-bottom: 40px;
+
+              .team-title {
+                margin: 0 auto;
+              }
+            }
+
+            .content {
+              ul {
+                padding-bottom: 30px;
+
+                li {
+                  list-style-type: disc;
+                }
+              }
+            }
+
+            .close {
+              position: absolute;
+              top: -70px;
+              right: 30px;
+              font-size: 3rem;
+              //color: $blue;
+              cursor: pointer;
+              width: 24px;
+              height: 24px;
+              transform: translate(-50%, 50%) rotate(180deg);
+              background-image: url("#{$image-path}close.svg");
+              background-size: contain;
+              background-repeat: no-repeat;
+              background-position: top center;
+
+              @include media-breakpoint-up(lg) {
+                top: -40px;
+              }
+            }
+          }
+          &.active {
+            max-height: 10000px;
+          }
+        }
+
+        &:hover {
+          .staff-link {
+            //color: #0bbee0;
+          }
+        }
+
+        &.open {
+          position: relative;
+          overflow: visible;
+
+          span.arrow {
+            opacity: 1;
+            bottom: 23px;
+            z-index: -3;
+          }
+
+          .team-name {
+            &:after {
+              transform: translate(-50%, 50%) rotate(180deg) !important;
+            }
+          }
+        }
+      }
+    }
+
+    &.two-col {
+      > ul {
+        > li {
+          &.team-item,
+          &.pushItem {
+            @include media-breakpoint-up(lg) {
+              width: 50%;
+              max-width: 460px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

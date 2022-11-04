@@ -1,0 +1,23 @@
+/* Helper Mixins */
+
+// Turn hex to rgba()
+@mixin rgba($color, $alpha) {
+  $rgba: rgba(red($color), green($color), blue($color), $alpha);
+  $argb: argb($rgba);
+  background-color: $color;
+  background-color: $rgba;
+  filter: #{"progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$argb}, endColorstr=#{$argb})"};
+  -ms-filter: #{"progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$argb}, endColorstr=#{$argb})"};
+}
+
+@mixin bs-gutter($bs-gutter, $sp: pos) {
+  @if $sp == neg {
+    margin-left: -$bs-gutter !important;
+    margin-right: -$bs-gutter !important;
+  }
+
+  @if $sp == pos {
+    padding-left: $bs-gutter !important;
+    padding-right: $bs-gutter !important;
+  }
+}
